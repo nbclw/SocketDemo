@@ -1,6 +1,6 @@
 ﻿namespace Service
 {
-    partial class s
+    partial class frmService
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -34,8 +34,8 @@
             this.lblPort = new System.Windows.Forms.Label();
             this.pnlArcgs = new System.Windows.Forms.Panel();
             this.grpListen = new System.Windows.Forms.GroupBox();
-            this.grpContent = new System.Windows.Forms.GroupBox();
             this.rtxListen = new System.Windows.Forms.RichTextBox();
+            this.grpContent = new System.Windows.Forms.GroupBox();
             this.rtxContent = new System.Windows.Forms.RichTextBox();
             this.grpListen.SuspendLayout();
             this.grpContent.SuspendLayout();
@@ -92,6 +92,15 @@
             this.grpListen.TabStop = false;
             this.grpListen.Text = "监听事件";
             // 
+            // rtxListen
+            // 
+            this.rtxListen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxListen.Location = new System.Drawing.Point(3, 21);
+            this.rtxListen.Name = "rtxListen";
+            this.rtxListen.Size = new System.Drawing.Size(306, 359);
+            this.rtxListen.TabIndex = 0;
+            this.rtxListen.Text = "";
+            // 
             // grpContent
             // 
             this.grpContent.Controls.Add(this.rtxContent);
@@ -103,15 +112,6 @@
             this.grpContent.TabStop = false;
             this.grpContent.Text = "内容";
             // 
-            // rtxListen
-            // 
-            this.rtxListen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtxListen.Location = new System.Drawing.Point(3, 21);
-            this.rtxListen.Name = "rtxListen";
-            this.rtxListen.Size = new System.Drawing.Size(306, 359);
-            this.rtxListen.TabIndex = 0;
-            this.rtxListen.Text = "";
-            // 
             // rtxContent
             // 
             this.rtxContent.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -121,7 +121,7 @@
             this.rtxContent.TabIndex = 0;
             this.rtxContent.Text = "";
             // 
-            // s
+            // frmService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -133,8 +133,10 @@
             this.Controls.Add(this.txtIP);
             this.Controls.Add(this.lblIP);
             this.Controls.Add(this.pnlArcgs);
-            this.Name = "s";
-            this.Text = "Form1";
+            this.Name = "frmService";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "服务端";
             this.grpListen.ResumeLayout(false);
             this.grpContent.ResumeLayout(false);
             this.ResumeLayout(false);
