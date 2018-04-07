@@ -37,6 +37,9 @@
             this.rtxListen = new System.Windows.Forms.RichTextBox();
             this.grpContent = new System.Windows.Forms.GroupBox();
             this.rtxContent = new System.Windows.Forms.RichTextBox();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.btnEnd = new System.Windows.Forms.Button();
+            this.pnlArcgs.SuspendLayout();
             this.grpListen.SuspendLayout();
             this.grpContent.SuspendLayout();
             this.SuspendLayout();
@@ -75,6 +78,8 @@
             // 
             // pnlArcgs
             // 
+            this.pnlArcgs.Controls.Add(this.btnEnd);
+            this.pnlArcgs.Controls.Add(this.btnStart);
             this.pnlArcgs.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlArcgs.Location = new System.Drawing.Point(0, 0);
             this.pnlArcgs.Name = "pnlArcgs";
@@ -121,6 +126,25 @@
             this.rtxContent.TabIndex = 0;
             this.rtxContent.Text = "";
             // 
+            // btnStart
+            // 
+            this.btnStart.Location = new System.Drawing.Point(422, 18);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.TabIndex = 0;
+            this.btnStart.Text = "开始";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // btnEnd
+            // 
+            this.btnEnd.Location = new System.Drawing.Point(536, 18);
+            this.btnEnd.Name = "btnEnd";
+            this.btnEnd.Size = new System.Drawing.Size(75, 23);
+            this.btnEnd.TabIndex = 1;
+            this.btnEnd.Text = "结束";
+            this.btnEnd.UseVisualStyleBackColor = true;
+            // 
             // frmService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -133,10 +157,12 @@
             this.Controls.Add(this.txtIP);
             this.Controls.Add(this.lblIP);
             this.Controls.Add(this.pnlArcgs);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmService";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "服务端";
+            this.pnlArcgs.ResumeLayout(false);
             this.grpListen.ResumeLayout(false);
             this.grpContent.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -155,6 +181,8 @@
         private System.Windows.Forms.RichTextBox rtxListen;
         private System.Windows.Forms.GroupBox grpContent;
         private System.Windows.Forms.RichTextBox rtxContent;
+        private System.Windows.Forms.Button btnEnd;
+        private System.Windows.Forms.Button btnStart;
     }
 }
 
