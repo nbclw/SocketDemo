@@ -70,6 +70,7 @@ namespace Service
             catch (Exception e)
             {
                 _sokWatch.Dispose();
+                _sokWatch = null;
                 MessageBox.Show("初始化Socket监视ERROR:" + e.Message);
                 b = false;
             }
