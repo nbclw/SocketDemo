@@ -33,12 +33,12 @@
             this.txtPort = new System.Windows.Forms.TextBox();
             this.lblPort = new System.Windows.Forms.Label();
             this.pnlArcgs = new System.Windows.Forms.Panel();
+            this.btnEnd = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.grpListen = new System.Windows.Forms.GroupBox();
             this.rtxListen = new System.Windows.Forms.RichTextBox();
             this.grpContent = new System.Windows.Forms.GroupBox();
             this.rtxContent = new System.Windows.Forms.RichTextBox();
-            this.btnStart = new System.Windows.Forms.Button();
-            this.btnEnd = new System.Windows.Forms.Button();
             this.pnlArcgs.SuspendLayout();
             this.grpListen.SuspendLayout();
             this.grpContent.SuspendLayout();
@@ -47,32 +47,37 @@
             // lblIP
             // 
             this.lblIP.AutoSize = true;
-            this.lblIP.Location = new System.Drawing.Point(39, 22);
+            this.lblIP.Location = new System.Drawing.Point(29, 18);
+            this.lblIP.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblIP.Name = "lblIP";
-            this.lblIP.Size = new System.Drawing.Size(23, 15);
+            this.lblIP.Size = new System.Drawing.Size(17, 12);
             this.lblIP.TabIndex = 0;
             this.lblIP.Text = "IP";
             // 
             // txtIP
             // 
-            this.txtIP.Location = new System.Drawing.Point(78, 19);
+            this.txtIP.Location = new System.Drawing.Point(58, 15);
+            this.txtIP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtIP.Name = "txtIP";
-            this.txtIP.Size = new System.Drawing.Size(100, 25);
+            this.txtIP.Size = new System.Drawing.Size(76, 21);
             this.txtIP.TabIndex = 1;
             // 
             // txtPort
             // 
-            this.txtPort.Location = new System.Drawing.Point(282, 19);
+            this.txtPort.Location = new System.Drawing.Point(212, 15);
+            this.txtPort.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(100, 25);
+            this.txtPort.Size = new System.Drawing.Size(76, 21);
             this.txtPort.TabIndex = 2;
+            this.txtPort.Text = "2112";
             // 
             // lblPort
             // 
             this.lblPort.AutoSize = true;
-            this.lblPort.Location = new System.Drawing.Point(222, 22);
+            this.lblPort.Location = new System.Drawing.Point(166, 18);
+            this.lblPort.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPort.Name = "lblPort";
-            this.lblPort.Size = new System.Drawing.Size(39, 15);
+            this.lblPort.Size = new System.Drawing.Size(29, 12);
             this.lblPort.TabIndex = 3;
             this.lblPort.Text = "Port";
             // 
@@ -82,17 +87,41 @@
             this.pnlArcgs.Controls.Add(this.btnStart);
             this.pnlArcgs.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlArcgs.Location = new System.Drawing.Point(0, 0);
+            this.pnlArcgs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlArcgs.Name = "pnlArcgs";
-            this.pnlArcgs.Size = new System.Drawing.Size(800, 67);
+            this.pnlArcgs.Size = new System.Drawing.Size(600, 54);
             this.pnlArcgs.TabIndex = 4;
+            // 
+            // btnEnd
+            // 
+            this.btnEnd.Location = new System.Drawing.Point(402, 14);
+            this.btnEnd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnEnd.Name = "btnEnd";
+            this.btnEnd.Size = new System.Drawing.Size(56, 18);
+            this.btnEnd.TabIndex = 1;
+            this.btnEnd.Text = "结束";
+            this.btnEnd.UseVisualStyleBackColor = true;
+            // 
+            // btnStart
+            // 
+            this.btnStart.Location = new System.Drawing.Point(316, 14);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(56, 18);
+            this.btnStart.TabIndex = 0;
+            this.btnStart.Text = "开始";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // grpListen
             // 
             this.grpListen.Controls.Add(this.rtxListen);
             this.grpListen.Dock = System.Windows.Forms.DockStyle.Left;
-            this.grpListen.Location = new System.Drawing.Point(0, 67);
+            this.grpListen.Location = new System.Drawing.Point(0, 54);
+            this.grpListen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grpListen.Name = "grpListen";
-            this.grpListen.Size = new System.Drawing.Size(312, 383);
+            this.grpListen.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpListen.Size = new System.Drawing.Size(234, 306);
             this.grpListen.TabIndex = 5;
             this.grpListen.TabStop = false;
             this.grpListen.Text = "监听事件";
@@ -100,9 +129,10 @@
             // rtxListen
             // 
             this.rtxListen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtxListen.Location = new System.Drawing.Point(3, 21);
+            this.rtxListen.Location = new System.Drawing.Point(2, 16);
+            this.rtxListen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rtxListen.Name = "rtxListen";
-            this.rtxListen.Size = new System.Drawing.Size(306, 359);
+            this.rtxListen.Size = new System.Drawing.Size(230, 288);
             this.rtxListen.TabIndex = 0;
             this.rtxListen.Text = "";
             // 
@@ -110,9 +140,11 @@
             // 
             this.grpContent.Controls.Add(this.rtxContent);
             this.grpContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpContent.Location = new System.Drawing.Point(312, 67);
+            this.grpContent.Location = new System.Drawing.Point(234, 54);
+            this.grpContent.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grpContent.Name = "grpContent";
-            this.grpContent.Size = new System.Drawing.Size(488, 383);
+            this.grpContent.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpContent.Size = new System.Drawing.Size(366, 306);
             this.grpContent.TabIndex = 6;
             this.grpContent.TabStop = false;
             this.grpContent.Text = "内容";
@@ -120,36 +152,18 @@
             // rtxContent
             // 
             this.rtxContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtxContent.Location = new System.Drawing.Point(3, 21);
+            this.rtxContent.Location = new System.Drawing.Point(2, 16);
+            this.rtxContent.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rtxContent.Name = "rtxContent";
-            this.rtxContent.Size = new System.Drawing.Size(482, 359);
+            this.rtxContent.Size = new System.Drawing.Size(362, 288);
             this.rtxContent.TabIndex = 0;
             this.rtxContent.Text = "";
             // 
-            // btnStart
-            // 
-            this.btnStart.Location = new System.Drawing.Point(422, 18);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 23);
-            this.btnStart.TabIndex = 0;
-            this.btnStart.Text = "开始";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
-            // btnEnd
-            // 
-            this.btnEnd.Location = new System.Drawing.Point(536, 18);
-            this.btnEnd.Name = "btnEnd";
-            this.btnEnd.Size = new System.Drawing.Size(75, 23);
-            this.btnEnd.TabIndex = 1;
-            this.btnEnd.Text = "结束";
-            this.btnEnd.UseVisualStyleBackColor = true;
-            // 
             // frmService
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 360);
             this.Controls.Add(this.grpContent);
             this.Controls.Add(this.grpListen);
             this.Controls.Add(this.lblPort);
@@ -158,10 +172,12 @@
             this.Controls.Add(this.lblIP);
             this.Controls.Add(this.pnlArcgs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmService";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "服务端";
+            this.Load += new System.EventHandler(this.frmService_Load);
             this.pnlArcgs.ResumeLayout(false);
             this.grpListen.ResumeLayout(false);
             this.grpContent.ResumeLayout(false);
