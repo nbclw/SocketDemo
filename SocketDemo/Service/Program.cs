@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,6 +16,15 @@ namespace Service
         [STAThread]
         static void Main()
         {
+            bool blnIsRunning;
+            Mutex mutexApp = new Mutex(false, Assembly.GetExecutingAssembly().FullName, out blnIsRunning);
+            if (!blnIsRunning)
+            {
+                MessageBox.Show("程序已经运行！", "提示",
+                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmService());

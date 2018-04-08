@@ -33,9 +33,14 @@
             this.txtIP = new System.Windows.Forms.TextBox();
             this.lblIP = new System.Windows.Forms.Label();
             this.pnlArcgs = new System.Windows.Forms.Panel();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.btnOnline = new System.Windows.Forms.Button();
+            this.rtxContent = new System.Windows.Forms.RichTextBox();
+            this.pnlContent = new System.Windows.Forms.Panel();
+            this.pnlMessage = new System.Windows.Forms.Panel();
+            this.rtxMessage = new System.Windows.Forms.RichTextBox();
+            this.btnSend = new System.Windows.Forms.Button();
             this.pnlArcgs.SuspendLayout();
+            this.pnlMessage.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblPort
@@ -51,7 +56,7 @@
             // txtPort
             // 
             this.txtPort.Location = new System.Drawing.Point(202, 18);
-            this.txtPort.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPort.Margin = new System.Windows.Forms.Padding(2);
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(76, 21);
             this.txtPort.TabIndex = 7;
@@ -60,7 +65,7 @@
             // txtIP
             // 
             this.txtIP.Location = new System.Drawing.Point(50, 18);
-            this.txtIP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtIP.Margin = new System.Windows.Forms.Padding(2);
             this.txtIP.Name = "txtIP";
             this.txtIP.Size = new System.Drawing.Size(76, 21);
             this.txtIP.TabIndex = 6;
@@ -85,19 +90,10 @@
             this.pnlArcgs.Controls.Add(this.lblIP);
             this.pnlArcgs.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlArcgs.Location = new System.Drawing.Point(0, 0);
-            this.pnlArcgs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlArcgs.Margin = new System.Windows.Forms.Padding(2);
             this.pnlArcgs.Name = "pnlArcgs";
             this.pnlArcgs.Size = new System.Drawing.Size(600, 54);
             this.pnlArcgs.TabIndex = 9;
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(78, 104);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(373, 200);
-            this.richTextBox1.TabIndex = 10;
-            this.richTextBox1.Text = "";
             // 
             // btnOnline
             // 
@@ -109,19 +105,72 @@
             this.btnOnline.UseVisualStyleBackColor = true;
             this.btnOnline.Click += new System.EventHandler(this.btnOnline_Click);
             // 
+            // rtxContent
+            // 
+            this.rtxContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxContent.Location = new System.Drawing.Point(0, 54);
+            this.rtxContent.Margin = new System.Windows.Forms.Padding(2);
+            this.rtxContent.Name = "rtxContent";
+            this.rtxContent.Size = new System.Drawing.Size(600, 236);
+            this.rtxContent.TabIndex = 10;
+            this.rtxContent.Text = "";
+            // 
+            // pnlContent
+            // 
+            this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContent.Location = new System.Drawing.Point(0, 54);
+            this.pnlContent.Name = "pnlContent";
+            this.pnlContent.Size = new System.Drawing.Size(600, 236);
+            this.pnlContent.TabIndex = 11;
+            // 
+            // pnlMessage
+            // 
+            this.pnlMessage.Controls.Add(this.btnSend);
+            this.pnlMessage.Controls.Add(this.rtxMessage);
+            this.pnlMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlMessage.Location = new System.Drawing.Point(0, 290);
+            this.pnlMessage.Name = "pnlMessage";
+            this.pnlMessage.Size = new System.Drawing.Size(600, 70);
+            this.pnlMessage.TabIndex = 0;
+            // 
+            // rtxMessage
+            // 
+            this.rtxMessage.Enabled = false;
+            this.rtxMessage.Location = new System.Drawing.Point(4, 3);
+            this.rtxMessage.Name = "rtxMessage";
+            this.rtxMessage.Size = new System.Drawing.Size(476, 64);
+            this.rtxMessage.TabIndex = 0;
+            this.rtxMessage.Text = "";
+            // 
+            // btnSend
+            // 
+            this.btnSend.Enabled = false;
+            this.btnSend.Location = new System.Drawing.Point(499, 23);
+            this.btnSend.Name = "btnSend";
+            this.btnSend.Size = new System.Drawing.Size(75, 23);
+            this.btnSend.TabIndex = 1;
+            this.btnSend.Text = "发送";
+            this.btnSend.UseVisualStyleBackColor = true;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
+            // 
             // frmClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 360);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.rtxContent);
+            this.Controls.Add(this.pnlContent);
             this.Controls.Add(this.pnlArcgs);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Controls.Add(this.pnlMessage);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmClient";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "聊天室";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmClient_FormClosing);
             this.pnlArcgs.ResumeLayout(false);
             this.pnlArcgs.PerformLayout();
+            this.pnlMessage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -133,8 +182,12 @@
         private System.Windows.Forms.TextBox txtIP;
         private System.Windows.Forms.Label lblIP;
         private System.Windows.Forms.Panel pnlArcgs;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox rtxContent;
         private System.Windows.Forms.Button btnOnline;
+        private System.Windows.Forms.Panel pnlContent;
+        private System.Windows.Forms.Panel pnlMessage;
+        private System.Windows.Forms.Button btnSend;
+        private System.Windows.Forms.RichTextBox rtxMessage;
     }
 }
 

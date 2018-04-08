@@ -57,7 +57,7 @@
             // txtIP
             // 
             this.txtIP.Location = new System.Drawing.Point(58, 15);
-            this.txtIP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtIP.Margin = new System.Windows.Forms.Padding(2);
             this.txtIP.Name = "txtIP";
             this.txtIP.Size = new System.Drawing.Size(76, 21);
             this.txtIP.TabIndex = 1;
@@ -65,7 +65,7 @@
             // txtPort
             // 
             this.txtPort.Location = new System.Drawing.Point(212, 15);
-            this.txtPort.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPort.Margin = new System.Windows.Forms.Padding(2);
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(76, 21);
             this.txtPort.TabIndex = 2;
@@ -87,7 +87,7 @@
             this.pnlArcgs.Controls.Add(this.btnStart);
             this.pnlArcgs.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlArcgs.Location = new System.Drawing.Point(0, 0);
-            this.pnlArcgs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlArcgs.Margin = new System.Windows.Forms.Padding(2);
             this.pnlArcgs.Name = "pnlArcgs";
             this.pnlArcgs.Size = new System.Drawing.Size(600, 54);
             this.pnlArcgs.TabIndex = 4;
@@ -95,17 +95,18 @@
             // btnEnd
             // 
             this.btnEnd.Location = new System.Drawing.Point(402, 14);
-            this.btnEnd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnEnd.Margin = new System.Windows.Forms.Padding(2);
             this.btnEnd.Name = "btnEnd";
             this.btnEnd.Size = new System.Drawing.Size(56, 18);
             this.btnEnd.TabIndex = 1;
             this.btnEnd.Text = "结束";
             this.btnEnd.UseVisualStyleBackColor = true;
+            this.btnEnd.Click += new System.EventHandler(this.btnEnd_Click);
             // 
             // btnStart
             // 
             this.btnStart.Location = new System.Drawing.Point(316, 14);
-            this.btnStart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(2);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(56, 18);
             this.btnStart.TabIndex = 0;
@@ -118,9 +119,9 @@
             this.grpListen.Controls.Add(this.rtxListen);
             this.grpListen.Dock = System.Windows.Forms.DockStyle.Left;
             this.grpListen.Location = new System.Drawing.Point(0, 54);
-            this.grpListen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpListen.Margin = new System.Windows.Forms.Padding(2);
             this.grpListen.Name = "grpListen";
-            this.grpListen.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpListen.Padding = new System.Windows.Forms.Padding(2);
             this.grpListen.Size = new System.Drawing.Size(234, 306);
             this.grpListen.TabIndex = 5;
             this.grpListen.TabStop = false;
@@ -130,7 +131,7 @@
             // 
             this.rtxListen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtxListen.Location = new System.Drawing.Point(2, 16);
-            this.rtxListen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rtxListen.Margin = new System.Windows.Forms.Padding(2);
             this.rtxListen.Name = "rtxListen";
             this.rtxListen.Size = new System.Drawing.Size(230, 288);
             this.rtxListen.TabIndex = 0;
@@ -141,9 +142,9 @@
             this.grpContent.Controls.Add(this.rtxContent);
             this.grpContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpContent.Location = new System.Drawing.Point(234, 54);
-            this.grpContent.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpContent.Margin = new System.Windows.Forms.Padding(2);
             this.grpContent.Name = "grpContent";
-            this.grpContent.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpContent.Padding = new System.Windows.Forms.Padding(2);
             this.grpContent.Size = new System.Drawing.Size(366, 306);
             this.grpContent.TabIndex = 6;
             this.grpContent.TabStop = false;
@@ -153,7 +154,7 @@
             // 
             this.rtxContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtxContent.Location = new System.Drawing.Point(2, 16);
-            this.rtxContent.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rtxContent.Margin = new System.Windows.Forms.Padding(2);
             this.rtxContent.Name = "rtxContent";
             this.rtxContent.Size = new System.Drawing.Size(362, 288);
             this.rtxContent.TabIndex = 0;
@@ -172,11 +173,12 @@
             this.Controls.Add(this.lblIP);
             this.Controls.Add(this.pnlArcgs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmService";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "服务端";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmService_FormClosing);
             this.Load += new System.EventHandler(this.frmService_Load);
             this.pnlArcgs.ResumeLayout(false);
             this.grpListen.ResumeLayout(false);

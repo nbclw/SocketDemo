@@ -22,8 +22,13 @@ namespace Service
         }
 
         #region 公共变量
-        Socket _sokConn = null;
-        Thread _thrMsg = null;
+        Socket _sokWatch;
+        Thread _thrMsg;
+
+        //用于停止Socket
+        bool _isSocketConn;
+        Socket _socClosed;
+        IPEndPoint _pointClosed;
         #endregion
 
         #region Method
@@ -51,88 +56,139 @@ namespace Service
         /// <param name="port"></param>
         /// <param name="listenCount"></param>
         /// <returns></returns>
-        private Socket InitSocketWatch(int port, int listenCount)
+        private bool InitSocketWatch(int port, int listenCount)
         {
-            Socket socketWatch = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            bool b = true;
+            if (_sokWatch == null)
+                _sokWatch = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
             try
             {
-                socketWatch.Bind(new IPEndPoint(IPAddress.Any, port));
-                socketWatch.Listen(listenCount);
+                _sokWatch.Bind(new IPEndPoint(IPAddress.Any, port));
+                _sokWatch.Listen(listenCount);
             }
             catch (Exception e)
             {
-                socketWatch.Dispose();
-                socketWatch = null;
+                _sokWatch.Dispose();
                 MessageBox.Show("初始化Socket监视ERROR:" + e.Message);
+                b = false;
             }
 
-            return socketWatch;
+            return b;
+        }
+
+        /// <summary>
+        /// 初始化管理监听，自己调用自己一下
+        /// </summary>
+        /// <param name="port"></param>
+        private void InitSocketClosed(int port)
+        {
+            if (_socClosed != null) return;
+            _socClosed = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            _pointClosed = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
         }
 
         /// <summary>
         /// 监听
         /// </summary>
         /// <param name="obj"></param>
-        private void Listen(object obj)
+        private void Listen()
         {
-            Socket socketWatch = obj as Socket;
-            while (true)
+            Invoke(new Action<string>(UpdateListen), "开始监听...");
+
+            Socket socketConn = null;
+            while (_isSocketConn)
             {
                 try
                 {
-                    Invoke(new Action(delegate
-                    {
-                        rtxListen.AppendText("开始监听... \n");
-                        rtxListen.ScrollToCaret();
-                    }));
+                    socketConn = _sokWatch.Accept();
+                    if (!_isSocketConn) break;
 
-                    _sokConn = socketWatch.Accept();
+                    string remoteEndPoint = socketConn.RemoteEndPoint.ToString();
+                    Invoke(new Action<string>(UpdateListen), remoteEndPoint.ToString() + "：成功连入");
 
-
-                    IPAddress clientIP = (_sokConn.RemoteEndPoint as IPEndPoint).Address;
-                    int clientPort = (_sokConn.RemoteEndPoint as IPEndPoint).Port;
-                    string remoteEndPoint = _sokConn.RemoteEndPoint.ToString();
-                    Invoke(new Action(delegate
-                    {
-                        rtxContent.AppendText(clientIP.ToString());
-                        rtxContent.AppendText(clientPort.ToString());
-                        rtxContent.AppendText(remoteEndPoint.ToString());
-                        rtxContent.ScrollToCaret();
-                    }));
-
-
-                    _sokConn.Close();
-
-                    Thread.Sleep(1000);
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(ReceiveMessage), socketConn);
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("监听ERROR:" + e.Message);
-                    socketWatch.Dispose();
-                    _sokConn.Dispose();
+                    Invoke(new Action(delegate
+                    {
+                        UpdateListen("监听ERROR:" + e.Message);
+                        ControlDisplay(true);
+                    }));
+
+                    socketConn.Close();
+                    _sokWatch.Close();
+                    _isSocketConn = false;
                     break;
                 }
             }
 
-            socketWatch.Dispose();
-            _sokConn.Dispose();
-
+            socketConn.Close();
+            _sokWatch.Close();
+            _sokWatch.Dispose();
+            _sokWatch = null;
             Invoke(new Action(delegate
             {
-                rtxListen.AppendText("监听结束 \n");
-                rtxListen.ScrollToCaret();
+                UpdateListen("监听结束");
                 ControlDisplay(true);
             }));
+        }
+
+        /// <summary>
+        /// 接收信息
+        /// </summary>
+        /// <param name="obj"></param>
+        private void ReceiveMessage(object obj)
+        {
+            Socket socketService = obj as Socket;
+            string point = socketService.RemoteEndPoint.ToString();
+            bool isLoop = true;
+            while (isLoop)
+            {
+                try
+                {
+                    byte[] receiveBuffer = new byte[1024];
+                    socketService.Receive(receiveBuffer);
+                    string strReceiveData = Encoding.Unicode.GetString(receiveBuffer);
+                    if (!string.IsNullOrWhiteSpace(strReceiveData))
+                    {
+                        Invoke(new Action<string>(UpdateContent), "-------------------");
+                        Invoke(new Action<string>(UpdateContent), point + ":");
+                        Invoke(new Action<string>(UpdateContent), strReceiveData);
+
+                        string strSendData = "success";
+                        int sendBufferSize = Encoding.Unicode.GetByteCount(strSendData);
+                        byte[] sendBuffer = new byte[sendBufferSize];
+                        sendBuffer = Encoding.Unicode.GetBytes(strSendData);
+                        socketService.Send(sendBuffer);
+                    }
+                }
+                catch (Exception)
+                {
+                    Invoke(new Action<string>(UpdateListen), point + "：断开连接");
+                    isLoop = false;
+                    socketService.Close();
+                }
+
+            }
         }
 
         /// <summary>
         /// 更新内容
         /// </summary>
         /// <param name="result"></param>
-        private void UpdateContent(string result)
+        private void UpdateListen(string result)
         {
             rtxListen.AppendText("\n");
             rtxListen.AppendText(result);
+            rtxListen.ScrollToCaret();
+        }
+        private void UpdateContent(string result)
+        {
+            rtxContent.AppendText("\n");
+            rtxContent.AppendText(result);
+            rtxContent.ScrollToCaret();
         }
 
         /// <summary>
@@ -146,7 +202,23 @@ namespace Service
             btnStart.Enabled = enable;
             btnEnd.Enabled = !enable;
         }
+
         #endregion
+
+        private void frmService_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //_isSocketConn = false;
+            //if (_socClosed != null)
+            //{
+            //    _socClosed.Connect(_pointClosed);
+            //    _socClosed.Close();
+            //}
+            if (_isSocketConn)
+            {
+                MessageBox.Show("Socket正在运行，请先停止！");
+                e.Cancel = true;
+            }
+        }
 
         private void frmService_Load(object sender, EventArgs e)
         {
@@ -158,14 +230,27 @@ namespace Service
             int port;
             if (InitPort(out port))
             {
-                Socket socketWatch = InitSocketWatch(port, 10);
-                if (socketWatch != null)
+                if (InitSocketWatch(port, 10))
                 {
+                    InitSocketClosed(port);
+                    _isSocketConn = true;
                     _thrMsg = new Thread(Listen);
                     _thrMsg.IsBackground = false;
-                    _thrMsg.Start(socketWatch);
+                    _thrMsg.Start();
                     ControlDisplay(false);
                 }
+            }
+        }
+
+        private void btnEnd_Click(object sender, EventArgs e)
+        {
+            _isSocketConn = false;
+            if (_socClosed != null)
+            {
+                _socClosed.Connect(_pointClosed);
+                _socClosed.Close();
+                _socClosed.Dispose();
+                _socClosed = null;
             }
         }
     }
