@@ -29,6 +29,9 @@ namespace Service
         bool _isSocketConn;
         Socket _socClosed;
         IPEndPoint _pointClosed;
+
+        //存储客户端信息
+        List<Client> _clients;
         #endregion
 
         #region Method
@@ -181,13 +184,17 @@ namespace Service
         /// <param name="result"></param>
         private void UpdateListen(string result)
         {
-            rtxListen.AppendText("\n");
+            if (rtxListen.TextLength > 0)
+                rtxListen.AppendText("\n");
+
             rtxListen.AppendText(result);
             rtxListen.ScrollToCaret();
         }
         private void UpdateContent(string result)
         {
-            rtxContent.AppendText("\n");
+            if (rtxListen.TextLength > 0)
+                rtxContent.AppendText("\n");
+
             rtxContent.AppendText(result);
             rtxContent.ScrollToCaret();
         }
@@ -223,6 +230,7 @@ namespace Service
 
         private void frmService_Load(object sender, EventArgs e)
         {
+            _clients = new List<Client>();
             ControlDisplay(true);
         }
 
