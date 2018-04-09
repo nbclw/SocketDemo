@@ -37,8 +37,9 @@
             this.rtxContent = new System.Windows.Forms.RichTextBox();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.pnlMessage = new System.Windows.Forms.Panel();
-            this.rtxMessage = new System.Windows.Forms.RichTextBox();
             this.btnSend = new System.Windows.Forms.Button();
+            this.rtxMessage = new System.Windows.Forms.RichTextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.pnlArcgs.SuspendLayout();
             this.pnlMessage.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +84,7 @@
             // 
             // pnlArcgs
             // 
+            this.pnlArcgs.Controls.Add(this.txtName);
             this.pnlArcgs.Controls.Add(this.btnOnline);
             this.pnlArcgs.Controls.Add(this.lblPort);
             this.pnlArcgs.Controls.Add(this.txtIP);
@@ -133,15 +135,6 @@
             this.pnlMessage.Size = new System.Drawing.Size(600, 70);
             this.pnlMessage.TabIndex = 0;
             // 
-            // rtxMessage
-            // 
-            this.rtxMessage.Enabled = false;
-            this.rtxMessage.Location = new System.Drawing.Point(4, 3);
-            this.rtxMessage.Name = "rtxMessage";
-            this.rtxMessage.Size = new System.Drawing.Size(476, 64);
-            this.rtxMessage.TabIndex = 0;
-            this.rtxMessage.Text = "";
-            // 
             // btnSend
             // 
             this.btnSend.Enabled = false;
@@ -152,6 +145,23 @@
             this.btnSend.Text = "发送";
             this.btnSend.UseVisualStyleBackColor = true;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
+            // 
+            // rtxMessage
+            // 
+            this.rtxMessage.Enabled = false;
+            this.rtxMessage.Location = new System.Drawing.Point(4, 3);
+            this.rtxMessage.Name = "rtxMessage";
+            this.rtxMessage.Size = new System.Drawing.Size(476, 64);
+            this.rtxMessage.TabIndex = 0;
+            this.rtxMessage.Text = "";
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(423, 18);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(100, 21);
+            this.txtName.TabIndex = 10;
+            this.txtName.Text = "user1";
             // 
             // frmClient
             // 
@@ -188,6 +198,7 @@
         private System.Windows.Forms.Panel pnlMessage;
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.RichTextBox rtxMessage;
+        private System.Windows.Forms.TextBox txtName;
     }
 }
 

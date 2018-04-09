@@ -23,6 +23,7 @@ namespace SocketClient
         #region 公共变量
         Socket _socketClient = null;
         byte[] _receiveBuffer = new byte[1024];
+        byte[] _sendBuffer = new byte[1024];
         #endregion
 
         #region Method
@@ -69,6 +70,20 @@ namespace SocketClient
             rtxMessage.Clear();
         }
 
+        /// <summary>
+        /// 发送信息
+        /// </summary>
+        /// <param name="message"></param>
+        private void SendMessage(string message)
+        {
+            _sendBuffer = Encoding.Unicode.GetBytes(message);
+            if (_socketClient != null)
+            {
+                _socketClient.Send(_sendBuffer);
+                _socketClient.BeginReceive(_receiveBuffer, 0, _receiveBuffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallBack), null);
+            }
+        }
+
         private void ControlEnable(bool enable)
         {
             txtIP.Enabled = enable;
@@ -81,12 +96,14 @@ namespace SocketClient
 
         private void frmClient_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
+
         }
 
         private void btnOnline_Click(object sender, EventArgs e)
         {
-            _socketClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            if (_socketClient == null)
+                _socketClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
             IPEndPoint point;
             if (InitPoint(out point))
             {
@@ -95,6 +112,7 @@ namespace SocketClient
                     _socketClient.Connect(point);
                     if (_socketClient.Connected)
                     {
+                        SendMessage("");
                         ControlEnable(false);
                     }
                 }
@@ -102,6 +120,7 @@ namespace SocketClient
                 {
                     MessageBox.Show("连入ERROR:" + ex.Message);
                     _socketClient.Dispose();
+                    _socketClient = null;
                 }
             }
         }
@@ -109,13 +128,7 @@ namespace SocketClient
         private void btnSend_Click(object sender, EventArgs e)
         {
             string strSendData = rtxMessage.Text;
-            byte[] sendBuffer = new byte[1024];
-            sendBuffer = Encoding.Unicode.GetBytes(strSendData);
-            if (_socketClient != null)
-            {
-                _socketClient.Send(sendBuffer);
-                _socketClient.BeginReceive(_receiveBuffer, 0, _receiveBuffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallBack), null);
-            }
+            SendMessage(strSendData);
         }
     }
 }
