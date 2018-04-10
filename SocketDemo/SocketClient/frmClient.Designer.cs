@@ -33,13 +33,13 @@
             this.txtIP = new System.Windows.Forms.TextBox();
             this.lblIP = new System.Windows.Forms.Label();
             this.pnlArcgs = new System.Windows.Forms.Panel();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.btnOnline = new System.Windows.Forms.Button();
             this.rtxContent = new System.Windows.Forms.RichTextBox();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.pnlMessage = new System.Windows.Forms.Panel();
             this.btnSend = new System.Windows.Forms.Button();
             this.rtxMessage = new System.Windows.Forms.RichTextBox();
-            this.txtName = new System.Windows.Forms.TextBox();
             this.pnlArcgs.SuspendLayout();
             this.pnlMessage.SuspendLayout();
             this.SuspendLayout();
@@ -96,6 +96,14 @@
             this.pnlArcgs.Name = "pnlArcgs";
             this.pnlArcgs.Size = new System.Drawing.Size(600, 54);
             this.pnlArcgs.TabIndex = 9;
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(423, 18);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(100, 21);
+            this.txtName.TabIndex = 10;
+            this.txtName.Text = "user1";
             // 
             // btnOnline
             // 
@@ -154,14 +162,7 @@
             this.rtxMessage.Size = new System.Drawing.Size(476, 64);
             this.rtxMessage.TabIndex = 0;
             this.rtxMessage.Text = "";
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(423, 18);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(100, 21);
-            this.txtName.TabIndex = 10;
-            this.txtName.Text = "user1";
+            this.rtxMessage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rtxMessage_KeyDown);
             // 
             // frmClient
             // 

@@ -65,23 +65,46 @@ namespace SocketClient
             int REnd = _socketClient.EndReceive(ar);
             string strReceiveData = Encoding.Unicode.GetString(_receiveBuffer, 0, REnd);
 
-            rtxContent.AppendText(strReceiveData);
-            rtxContent.AppendText("\n");
-            rtxMessage.Clear();
+            AppendMessageToBox(strReceiveData);
         }
 
         /// <summary>
         /// 发送信息
         /// </summary>
         /// <param name="message"></param>
+        private void SendMessage()
+        {
+            string strSendData = rtxMessage.Text;
+            AppendMessageToBox(txtName.Text + "    " + DateTime.Now.ToString() + "：" + strSendData);
+            SendMessage(strSendData);
+        }
         private void SendMessage(string message)
         {
             _sendBuffer = Encoding.Unicode.GetBytes(message);
             if (_socketClient != null)
             {
                 _socketClient.Send(_sendBuffer);
-                _socketClient.BeginReceive(_receiveBuffer, 0, _receiveBuffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallBack), null);
+                rtxMessage.Clear();
             }
+        }
+
+        private void AppendMessageToBox(string message)
+        {
+            rtxContent.AppendText("-------------------");
+            rtxContent.AppendText("\n");
+            foreach (var str in message.Split('：'))
+            {
+                rtxContent.AppendText(str);
+                rtxContent.AppendText("\n");
+            }
+            rtxContent.ScrollToCaret();
+
+            ListenServer();
+        }
+
+        private void ListenServer()
+        {
+            _socketClient.BeginReceive(_receiveBuffer, 0, _receiveBuffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallBack), null);
         }
 
         private void ControlEnable(bool enable)
@@ -99,6 +122,15 @@ namespace SocketClient
 
         }
 
+        private void rtxMessage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendMessage();
+                e.Handled = true;
+            }
+        }
+
         private void btnOnline_Click(object sender, EventArgs e)
         {
             if (_socketClient == null)
@@ -112,7 +144,8 @@ namespace SocketClient
                     _socketClient.Connect(point);
                     if (_socketClient.Connected)
                     {
-                        SendMessage("");
+                        SendMessage(txtName.Text);
+                        ListenServer();
                         ControlEnable(false);
                     }
                 }
@@ -127,8 +160,7 @@ namespace SocketClient
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            string strSendData = rtxMessage.Text;
-            SendMessage(strSendData);
+            SendMessage();
         }
     }
 }

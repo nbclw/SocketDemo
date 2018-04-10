@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblIP = new System.Windows.Forms.Label();
-            this.txtIP = new System.Windows.Forms.TextBox();
+            this.lblCount = new System.Windows.Forms.Label();
+            this.txtCount = new System.Windows.Forms.TextBox();
             this.txtPort = new System.Windows.Forms.TextBox();
             this.lblPort = new System.Windows.Forms.Label();
             this.pnlArcgs = new System.Windows.Forms.Panel();
@@ -44,23 +44,24 @@
             this.grpContent.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblIP
+            // lblCount
             // 
-            this.lblIP.AutoSize = true;
-            this.lblIP.Location = new System.Drawing.Point(29, 18);
-            this.lblIP.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblIP.Name = "lblIP";
-            this.lblIP.Size = new System.Drawing.Size(17, 12);
-            this.lblIP.TabIndex = 0;
-            this.lblIP.Text = "IP";
+            this.lblCount.AutoSize = true;
+            this.lblCount.Location = new System.Drawing.Point(23, 18);
+            this.lblCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(41, 12);
+            this.lblCount.TabIndex = 0;
+            this.lblCount.Text = "连接数";
             // 
-            // txtIP
+            // txtCount
             // 
-            this.txtIP.Location = new System.Drawing.Point(58, 15);
-            this.txtIP.Margin = new System.Windows.Forms.Padding(2);
-            this.txtIP.Name = "txtIP";
-            this.txtIP.Size = new System.Drawing.Size(76, 21);
-            this.txtIP.TabIndex = 1;
+            this.txtCount.Location = new System.Drawing.Point(73, 15);
+            this.txtCount.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCount.Name = "txtCount";
+            this.txtCount.Size = new System.Drawing.Size(76, 21);
+            this.txtCount.TabIndex = 1;
+            this.txtCount.Text = "10";
             // 
             // txtPort
             // 
@@ -97,7 +98,7 @@
             this.btnEnd.Location = new System.Drawing.Point(402, 14);
             this.btnEnd.Margin = new System.Windows.Forms.Padding(2);
             this.btnEnd.Name = "btnEnd";
-            this.btnEnd.Size = new System.Drawing.Size(56, 18);
+            this.btnEnd.Size = new System.Drawing.Size(56, 23);
             this.btnEnd.TabIndex = 1;
             this.btnEnd.Text = "结束";
             this.btnEnd.UseVisualStyleBackColor = true;
@@ -108,7 +109,7 @@
             this.btnStart.Location = new System.Drawing.Point(316, 14);
             this.btnStart.Margin = new System.Windows.Forms.Padding(2);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(56, 18);
+            this.btnStart.Size = new System.Drawing.Size(56, 23);
             this.btnStart.TabIndex = 0;
             this.btnStart.Text = "开始";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -169,8 +170,8 @@
             this.Controls.Add(this.grpListen);
             this.Controls.Add(this.lblPort);
             this.Controls.Add(this.txtPort);
-            this.Controls.Add(this.txtIP);
-            this.Controls.Add(this.lblIP);
+            this.Controls.Add(this.txtCount);
+            this.Controls.Add(this.lblCount);
             this.Controls.Add(this.pnlArcgs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -190,8 +191,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblIP;
-        private System.Windows.Forms.TextBox txtIP;
+        private System.Windows.Forms.Label lblCount;
+        private System.Windows.Forms.TextBox txtCount;
         private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.Label lblPort;
         private System.Windows.Forms.Panel pnlArcgs;
